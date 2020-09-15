@@ -1,0 +1,89 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button class="btn btn-navbar" data-toggle="collapse" data-target="#app-nav-top-bar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand"><i class="icon-rss"> Ramon</i></a>          
+
+            <div id="app-nav-top-bar" class="nav-collapse">                        
+                <ul class="nav pull-right">                
+
+                    <li>
+                        <a data-toggle="modal" data-target="#myModal" href="#">Cambiar Contraseña</a>                      
+
+                    </li>
+                    <li>
+                        <a href="../static/cerrar-sesion.php">Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cambiar Contraseña</h4>
+            </div>
+            <div class="modal-body">
+                <div id="acct-password-row" class="span7">
+                    <fieldset>                  
+                        <div class="control-group ">
+                            <label class="control-label">Contraseña Actual<span class="required"></span></label>
+                            <div class="controls">
+                                <input id="oldpass" name="oldpass" class="span4" type="password" value="" required>
+                            </div>
+                        </div>                      
+                        <div class="control-group ">
+                            <label class="control-label">Nueva Contraseña</label>
+                            <div class="controls">
+                                <input id="newpass" name="newpass" class="span4" type="password" value="" required>
+                            </div>
+                        </div>                       
+                        <div class="control-group ">
+                            <label class="control-label">Confirmar Contraseña</label>
+                            <div class="controls">
+                                <input id="confirmarpass" name="confirmarpass" class="span4" type="password" value="" required>
+                            </div>
+                        </div> 
+                        <p id="vpass"></p>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="myFormSubmit" onclick="cambiaclave()">Guardar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function cambiaclave() {
+        var apass = $.trim($("#oldpass").val());
+        var npass = $.trim($("#newpass").val());
+        var cpass = $.trim($("#confirmarpass").val());
+        if (!apass || !npass || !cpass) {
+            $('#vpass').html('<font color="red">Debe completar todos los campos</font>');
+        } else {
+            if (npass !== cpass) {
+                $('#vpass').html('<font color="red">Campos de contraseña nueva no coinciden</font>');
+            } else {
+                if (npass.length < 5) {
+                    $('#vpass').html('<font color="red">La contraseña debe tener mínimo 5 caracteres</font>');
+                } else {
+                    alert('Contraseña Actualizada Correctamente');
+                    $('#myModal').modal('hide');
+                }
+
+            }
+        }
+    }   
+</script>
